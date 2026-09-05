@@ -1,19 +1,62 @@
 {
   "project": "Geovana & Lourenço",
-  "status": "SOURCE_AUDIT_REQUIRED",
+  "status": "READY_FOR_SITE_DISTRIBUTION",
   "sourceWebsite": "https://geoelou.my.canva.site/",
   "sourceDesign": null,
-  "photos": [],
+  "assetBaseUrl": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco",
+  "photos": [
+    {
+      "id": "COUPLE-HERO-01",
+      "role": "hero",
+      "section": "hero",
+      "orientation": "horizontal",
+      "path": "assets/geovana-lourenco/casal/hero-casal-horizontal.webp",
+      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/casal/hero-casal-horizontal.webp",
+      "status": "READY"
+    },
+    {
+      "id": "COUPLE-PORTRAIT-02",
+      "role": "editorial_portrait",
+      "section": "home_editorial_secondary",
+      "orientation": "vertical",
+      "path": "assets/geovana-lourenco/casal/casal-elegante-vertical.webp",
+      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/casal/casal-elegante-vertical.webp",
+      "status": "READY"
+    },
+    {
+      "id": "COUPLE-ENGAGEMENT-03",
+      "role": "engagement_story",
+      "section": "home_story_or_closing",
+      "orientation": "vertical",
+      "path": "assets/geovana-lourenco/casal/noivado-vertical.webp",
+      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/casal/noivado-vertical.webp",
+      "status": "READY"
+    },
+    {
+      "id": "VENUE-01",
+      "role": "venue",
+      "section": "local",
+      "orientation": "horizontal",
+      "path": "assets/geovana-lourenco/local/ballroom-moress-horizontal.webp",
+      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/local/ballroom-moress-horizontal.webp",
+      "status": "READY"
+    }
+  ],
   "videos": [],
-  "knownPendingAssets": [
-    {"id":"IMG-001","role":"hero","status":"NEEDS_SOURCE_CONFIRMATION"},
-    {"id":"IMG-002","role":"venue","status":"NEEDS_SOURCE_CONFIRMATION"},
-    {"id":"IMG-004","role":"pix_qr","status":"NEEDS_SOURCE_CONFIRMATION"},
-    {"id":"IMG-021","role":"closing","status":"NEEDS_SOURCE_CONFIRMATION"}
+  "distributionRules": {
+    "hero": "COUPLE-HERO-01",
+    "local": "VENUE-01",
+    "secondaryEditorial": "COUPLE-PORTRAIT-02",
+    "storyOrClosing": "COUPLE-ENGAGEMENT-03"
+  },
+  "pending": [
+    "QR Pix final em alta resolução, se ainda não houver asset definitivo.",
+    "Fotos adicionais do casal que Lourenço enviar posteriormente.",
+    "Vídeos reais do casal/evento, caso sejam enviados posteriormente."
   ],
   "notes": [
-    "The published my.canva.site URL is not sufficient to enumerate original Canva media assets through the connected Canva account.",
-    "Video presence must be confirmed from the original Canva design/share link before declaring totalVideos=0.",
-    "Do not generate or substitute couple photos/videos without explicit approval."
+    "Os quatro assets acima estão organizados no repositório para consumo público pelo site.",
+    "Não substituir automaticamente estes assets por imagens genéricas ou stock.",
+    "Novas fotos do casal deverão ser adicionadas mantendo a mesma organização editorial por função/seção."
   ]
 }
