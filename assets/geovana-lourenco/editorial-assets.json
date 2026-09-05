@@ -45,7 +45,7 @@
   "pix": {
     "keyType": "phone",
     "keyDisplay": "43 99635-8399",
-    "keyRaw": "43996358399",
+    "keyRaw": "+5543996358399",
     "qrCode": {
       "path": "assets/geovana-lourenco/pix/qrcode-pix-geovana-lourenco.png",
       "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/pix/qrcode-pix-geovana-lourenco.png",
@@ -69,7 +69,7 @@
   ],
   "notes": [
     "Os quatro assets editoriais finais estão publicados em AVIF e prontos para consumo público pelo site.",
-    "O QR Code Pix foi atualizado para BR Code estático e validado por leitura do payload EMV com a chave 43996358399.",
+    "O QR Code Pix usa BR Code estático; a chave de telefone foi normalizada para o formato internacional +5543996358399 conforme o padrão do Banco Central.",
     "Não substituir automaticamente estes assets por imagens genéricas ou stock.",
     "Novas fotos do casal deverão ser adicionadas mantendo a mesma organização editorial por função/seção."
   ]
