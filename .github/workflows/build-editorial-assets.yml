@@ -16,20 +16,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Decode WebP assets
+      - name: Decode editorial assets
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p assets/geovana-lourenco/casal assets/geovana-lourenco/local
-          cat .asset-upload/hero/part-*.txt | base64 -d > assets/geovana-lourenco/casal/hero-casal-horizontal.webp
-          cat .asset-upload/casal-elegante/part-*.txt | base64 -d > assets/geovana-lourenco/casal/casal-elegante-vertical.webp
-          cat .asset-upload/noivado/part-*.txt | base64 -d > assets/geovana-lourenco/casal/noivado-vertical.webp
-          cat .asset-upload/local/part-*.txt | base64 -d > assets/geovana-lourenco/local/ballroom-moress-horizontal.webp
-          file assets/geovana-lourenco/casal/*.webp assets/geovana-lourenco/local/ballroom-moress-horizontal.webp
-          test -s assets/geovana-lourenco/casal/hero-casal-horizontal.webp
-          test -s assets/geovana-lourenco/casal/casal-elegante-vertical.webp
-          test -s assets/geovana-lourenco/casal/noivado-vertical.webp
-          test -s assets/geovana-lourenco/local/ballroom-moress-horizontal.webp
+          cat .asset-upload/hero/part-*.txt | base64 -d > assets/geovana-lourenco/casal/hero-casal-horizontal.avif
+          cat .asset-upload/casal-elegante/part-*.txt | base64 -d > assets/geovana-lourenco/casal/casal-elegante-vertical.avif
+          cat .asset-upload/noivado/part-*.txt | base64 -d > assets/geovana-lourenco/casal/noivado-vertical.avif
+          cat .asset-upload/local/part-*.txt | base64 -d > assets/geovana-lourenco/local/ballroom-moress-horizontal.avif
+          file assets/geovana-lourenco/casal/*.avif assets/geovana-lourenco/local/ballroom-moress-horizontal.avif
+          test -s assets/geovana-lourenco/casal/hero-casal-horizontal.avif
+          test -s assets/geovana-lourenco/casal/casal-elegante-vertical.avif
+          test -s assets/geovana-lourenco/casal/noivado-vertical.avif
+          test -s assets/geovana-lourenco/local/ballroom-moress-horizontal.avif
 
       - name: Commit generated assets
         shell: bash
@@ -37,13 +37,14 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/geovana-lourenco/casal/hero-casal-horizontal.webp \
-                  assets/geovana-lourenco/casal/casal-elegante-vertical.webp \
-                  assets/geovana-lourenco/casal/noivado-vertical.webp \
-                  assets/geovana-lourenco/local/ballroom-moress-horizontal.webp
+          rm -f assets/geovana-lourenco/casal/hero-casal-horizontal.webp \
+                assets/geovana-lourenco/casal/casal-elegante-vertical.webp \
+                assets/geovana-lourenco/casal/noivado-vertical.webp \
+                assets/geovana-lourenco/local/ballroom-moress-horizontal.webp
+          git add -A assets/geovana-lourenco/casal assets/geovana-lourenco/local
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Build editorial WebP assets"
+            git commit -m "Build editorial AVIF assets"
             git push
           fi
