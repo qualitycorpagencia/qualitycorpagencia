@@ -3,7 +3,7 @@ name: Build editorial assets
 on:
   push:
     paths:
-      - '.asset-upload-v2/READY'
+      - '.asset-upload-v3/READY'
   workflow_dispatch:
 
 permissions:
@@ -21,10 +21,10 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p assets/geovana-lourenco/casal assets/geovana-lourenco/local
-          cat .asset-upload-v2/hero/part-*.txt | base64 -d > assets/geovana-lourenco/casal/hero-casal-horizontal.webp
-          cat .asset-upload-v2/elegante/part-*.txt | base64 -d > assets/geovana-lourenco/casal/casal-elegante-vertical.webp
-          cat .asset-upload-v2/noivado/part-*.txt | base64 -d > assets/geovana-lourenco/casal/noivado-vertical.webp
-          cat .asset-upload-v2/local/part-*.txt | base64 -d > assets/geovana-lourenco/local/ballroom-moress-horizontal.webp
+          cat .asset-upload-v3/hero/part-*.txt | base64 -d > assets/geovana-lourenco/casal/hero-casal-horizontal.webp
+          cat .asset-upload-v3/elegante/part-*.txt | base64 -d > assets/geovana-lourenco/casal/casal-elegante-vertical.webp
+          cat .asset-upload-v3/noivado/part-*.txt | base64 -d > assets/geovana-lourenco/casal/noivado-vertical.webp
+          cat .asset-upload-v3/local/part-*.txt | base64 -d > assets/geovana-lourenco/local/ballroom-moress-horizontal.webp
           file assets/geovana-lourenco/casal/*.webp assets/geovana-lourenco/local/ballroom-moress-horizontal.webp
           test -s assets/geovana-lourenco/casal/hero-casal-horizontal.webp
           test -s assets/geovana-lourenco/casal/casal-elegante-vertical.webp
@@ -42,6 +42,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Atualiza assets editoriais em alta resolução"
+            git commit -m "Atualiza assets editoriais Geovana e Lourenço"
             git push
           fi
