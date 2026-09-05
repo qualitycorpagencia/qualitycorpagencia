@@ -10,8 +10,8 @@
       "role": "hero",
       "section": "hero",
       "orientation": "horizontal",
-      "path": "assets/geovana-lourenco/casal/hero-casal-horizontal.webp",
-      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/casal/hero-casal-horizontal.webp",
+      "path": "assets/geovana-lourenco/casal/hero-casal-horizontal.avif",
+      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/casal/hero-casal-horizontal.avif",
       "status": "READY"
     },
     {
@@ -19,8 +19,8 @@
       "role": "editorial_portrait",
       "section": "home_editorial_secondary",
       "orientation": "vertical",
-      "path": "assets/geovana-lourenco/casal/casal-elegante-vertical.webp",
-      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/casal/casal-elegante-vertical.webp",
+      "path": "assets/geovana-lourenco/casal/casal-elegante-vertical.avif",
+      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/casal/casal-elegante-vertical.avif",
       "status": "READY"
     },
     {
@@ -28,8 +28,8 @@
       "role": "engagement_story",
       "section": "home_story_or_closing",
       "orientation": "vertical",
-      "path": "assets/geovana-lourenco/casal/noivado-vertical.webp",
-      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/casal/noivado-vertical.webp",
+      "path": "assets/geovana-lourenco/casal/noivado-vertical.avif",
+      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/casal/noivado-vertical.avif",
       "status": "READY"
     },
     {
@@ -37,8 +37,8 @@
       "role": "venue",
       "section": "local",
       "orientation": "horizontal",
-      "path": "assets/geovana-lourenco/local/ballroom-moress-horizontal.webp",
-      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/local/ballroom-moress-horizontal.webp",
+      "path": "assets/geovana-lourenco/local/ballroom-moress-horizontal.avif",
+      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/local/ballroom-moress-horizontal.avif",
       "status": "READY"
     }
   ],
@@ -55,8 +55,9 @@
     "Vídeos reais do casal/evento, caso sejam enviados posteriormente."
   ],
   "notes": [
-    "Os quatro assets acima estão organizados no repositório para consumo público pelo site.",
+    "Os quatro assets editoriais finais estão publicados em AVIF e prontos para consumo público pelo site.",
     "Não substituir automaticamente estes assets por imagens genéricas ou stock.",
-    "Novas fotos do casal deverão ser adicionadas mantendo a mesma organização editorial por função/seção."
+    "Novas fotos do casal deverão ser adicionadas mantendo a mesma organização editorial por função/seção.",
+    "Os antigos WebP incompletos foram removidos para evitar uso acidental."
   ]
 }
