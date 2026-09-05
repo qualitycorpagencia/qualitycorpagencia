@@ -1,0 +1,19 @@
+{
+  "project": "Geovana & Lourenço",
+  "status": "SOURCE_AUDIT_REQUIRED",
+  "sourceWebsite": "https://geoelou.my.canva.site/",
+  "sourceDesign": null,
+  "photos": [],
+  "videos": [],
+  "knownPendingAssets": [
+    {"id":"IMG-001","role":"hero","status":"NEEDS_SOURCE_CONFIRMATION"},
+    {"id":"IMG-002","role":"venue","status":"NEEDS_SOURCE_CONFIRMATION"},
+    {"id":"IMG-004","role":"pix_qr","status":"NEEDS_SOURCE_CONFIRMATION"},
+    {"id":"IMG-021","role":"closing","status":"NEEDS_SOURCE_CONFIRMATION"}
+  ],
+  "notes": [
+    "The published my.canva.site URL is not sufficient to enumerate original Canva media assets through the connected Canva account.",
+    "Video presence must be confirmed from the original Canva design/share link before declaring totalVideos=0.",
+    "Do not generate or substitute couple photos/videos without explicit approval."
+  ]
+}
