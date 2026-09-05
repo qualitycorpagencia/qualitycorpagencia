@@ -50,7 +50,10 @@
       "path": "assets/geovana-lourenco/pix/qrcode-pix-geovana-lourenco.png",
       "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/pix/qrcode-pix-geovana-lourenco.png",
       "status": "READY",
-      "encoding": "PLAIN_KEY_TEXT"
+      "encoding": "PIX_BR_CODE_STATIC",
+      "merchantName": "GEOVANA E LOURENCO",
+      "merchantCity": "LONDRINA",
+      "txid": "***"
     }
   },
   "videos": [],
@@ -62,12 +65,11 @@
   },
   "pending": [
     "Fotos adicionais do casal que Lourenço enviar posteriormente.",
-    "Vídeos reais do casal/evento, caso sejam enviados posteriormente.",
-    "Validar se o cliente deseja um QR Pix bancário BR Code; o QR atual codifica apenas a chave de telefone fornecida."
+    "Vídeos reais do casal/evento, caso sejam enviados posteriormente."
   ],
   "notes": [
     "Os quatro assets editoriais finais estão publicados em AVIF e prontos para consumo público pelo site.",
-    "O QR Code personalizado usa a paleta cream/espresso/terracotta do projeto e foi validado para leitura da chave 43996358399.",
+    "O QR Code Pix foi atualizado para BR Code estático e validado por leitura do payload EMV com a chave 43996358399.",
     "Não substituir automaticamente estes assets por imagens genéricas ou stock.",
     "Novas fotos do casal deverão ser adicionadas mantendo a mesma organização editorial por função/seção."
   ]
