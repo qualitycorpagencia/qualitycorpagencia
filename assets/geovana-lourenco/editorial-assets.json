@@ -42,6 +42,17 @@
       "status": "READY"
     }
   ],
+  "pix": {
+    "keyType": "phone",
+    "keyDisplay": "43 99635-8399",
+    "keyRaw": "43996358399",
+    "qrCode": {
+      "path": "assets/geovana-lourenco/pix/qrcode-pix-geovana-lourenco.png",
+      "url": "https://raw.githubusercontent.com/qualitycorpagencia/qualitycorpagencia/main/assets/geovana-lourenco/pix/qrcode-pix-geovana-lourenco.png",
+      "status": "READY",
+      "encoding": "PLAIN_KEY_TEXT"
+    }
+  },
   "videos": [],
   "distributionRules": {
     "hero": "COUPLE-HERO-01",
@@ -50,14 +61,14 @@
     "storyOrClosing": "COUPLE-ENGAGEMENT-03"
   },
   "pending": [
-    "QR Pix final em alta resolução, se ainda não houver asset definitivo.",
     "Fotos adicionais do casal que Lourenço enviar posteriormente.",
-    "Vídeos reais do casal/evento, caso sejam enviados posteriormente."
+    "Vídeos reais do casal/evento, caso sejam enviados posteriormente.",
+    "Validar se o cliente deseja um QR Pix bancário BR Code; o QR atual codifica apenas a chave de telefone fornecida."
   ],
   "notes": [
     "Os quatro assets editoriais finais estão publicados em AVIF e prontos para consumo público pelo site.",
+    "O QR Code personalizado usa a paleta cream/espresso/terracotta do projeto e foi validado para leitura da chave 43996358399.",
     "Não substituir automaticamente estes assets por imagens genéricas ou stock.",
-    "Novas fotos do casal deverão ser adicionadas mantendo a mesma organização editorial por função/seção.",
-    "Os antigos WebP incompletos foram removidos para evitar uso acidental."
+    "Novas fotos do casal deverão ser adicionadas mantendo a mesma organização editorial por função/seção."
   ]
 }
