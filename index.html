@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Churrasco de Confraternização — STNB Polo Campinas</title>
+  <meta name="description" content="Inscrição para o Churrasco de Confraternização de Final de Ano do STNB Polo Campinas." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="topbar container">
+      <img src="logo-opt.png" alt="Centro Nazareno de Capacitação e STNB" class="brand-logo" />
+      <div class="motto">ESTUDO<br>CARÁTER<br>MISSÃO</div>
+    </div>
+
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">CONFRATERNIZAÇÃO DE FINAL DE ANO</span>
+        <h1>Churrasco<br><span>STNB Polo Campinas</span></h1>
+        <p class="lead">Um tempo especial para celebrarmos as conquistas deste ano e fortalecermos nossos laços como família STNB.</p>
+        <div class="event-cards">
+          <div><b>30/11/2026</b><span>segunda-feira</span></div>
+          <div><b>19h</b><span>horário</span></div>
+          <div><b>Recanto Maanaim</b><span>salão de festa</span></div>
+        </div>
+        <div class="price-box">
+          <div><small>VALOR POR ADULTO</small><strong>R$ 62,00</strong></div>
+          <p>Buffet completo de churrasco, <b>refrigerante</b> e água.</p>
+          <p class="minor">Crianças de até 8 anos não pagam.</p>
+        </div>
+        <a href="#inscricao" class="btn primary">Fazer minha inscrição</a>
+      </div>
+      <div class="hero-art">
+        <img src="poster.jpg" alt="Churrasco de confraternização STNB Polo Campinas" />
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container included">
+      <div class="section-heading">
+        <span class="eyebrow">O QUE ESTÁ INCLUSO</span>
+        <h2>Confraternização completa</h2>
+      </div>
+      <div class="benefits">
+        <article><span>🥩</span><h3>Buffet de churrasco</h3><p>Refeição completa para celebrarmos juntos.</p></article>
+        <article><span>🥤</span><h3>Refrigerante</h3><p>Bebidas incluídas no valor da inscrição.</p></article>
+        <article><span>💧</span><h3>Água</h3><p>Água disponível durante a confraternização.</p></article>
+        <article><span>🤝</span><h3>Comunhão</h3><p>Um encerramento especial com a família STNB.</p></article>
+      </div>
+    </section>
+
+    <section id="inscricao" class="form-section">
+      <div class="container form-grid">
+        <div class="form-intro">
+          <span class="eyebrow">INSCRIÇÃO</span>
+          <h2>Confirme sua participação</h2>
+          <p>Preencha os dados abaixo. O valor é calculado automaticamente conforme a quantidade de adultos. Crianças de 0 a 8 anos não pagam.</p>
+          <div class="deadline">Pagamento até <b>20/11/2026</b></div>
+        </div>
+
+        <form id="registrationForm" name="churrasco-stnb" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="registration-card">
+          <input type="hidden" name="form-name" value="churrasco-stnb" />
+          <p class="hidden"><label>Não preencha: <input name="bot-field" /></label></p>
+          <input type="hidden" name="adultos" id="adultosHidden" />
+          <input type="hidden" name="criancas" id="criancasHidden" />
+          <input type="hidden" name="acompanhantes" id="acompanhantesHidden" />
+          <input type="hidden" name="criancas_detalhes" id="criancasDetalhesHidden" />
+          <input type="hidden" name="valor_total" id="valorTotalHidden" />
+          <input type="hidden" name="status_pagamento" value="pendente" />
+          <input type="hidden" name="inscricao_id" id="inscricaoIdHidden" />
+
+          <div class="field two-col">
+            <label>Nome completo *</label>
+            <input required name="nome" type="text" autocomplete="name" placeholder="Seu nome completo" />
+          </div>
+
+          <div class="row">
+            <div class="field"><label>WhatsApp com DDD *</label><input required name="whatsapp" type="tel" placeholder="(19) 99999-9999" /></div>
+            <div class="field"><label>Turma / vínculo *</label>
+              <select required name="turma">
+                <option value="">Selecione</option><option>1º ano</option><option>2º ano</option><option>3º ano</option><option>4º ano</option><option>Professor</option><option>Convidado / familiar</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row counters">
+            <div class="counter-box"><label>Adultos pagantes *</label><div class="stepper"><button type="button" data-step="adult" data-dir="-1">−</button><span id="adultCount">1</span><button type="button" data-step="adult" data-dir="1">+</button></div><small>Inclua você na quantidade.</small></div>
+            <div class="counter-box"><label>Crianças até 8 anos</label><div class="stepper"><button type="button" data-step="child" data-dir="-1">−</button><span id="childCount">0</span><button type="button" data-step="child" data-dir="1">+</button></div><small>Não pagam.</small></div>
+          </div>
+
+          <div id="companionsWrap" class="dynamic-block"></div>
+          <div id="childrenWrap" class="dynamic-block"></div>
+
+          <div class="field"><label>Observações</label><textarea name="observacoes" rows="3" placeholder="Informações adicionais (opcional)"></textarea></div>
+
+          <label class="consent"><input required type="checkbox" name="ciencia" value="sim" /> <span>Estou ciente de que o valor é R$ 62,00 por adulto, crianças até 8 anos não pagam e o pagamento deve ser realizado até 20/11.</span></label>
+
+          <div class="summary">
+            <h3>Resumo da inscrição</h3>
+            <div><span>Adultos</span><b id="summaryAdults">1</b></div>
+            <div><span>Crianças</span><b id="summaryChildren">0</b></div>
+            <div class="total"><span>Total a pagar</span><strong id="summaryTotal">R$ 62,00</strong></div>
+          </div>
+
+          <button class="btn primary full" type="submit">Confirmar inscrição</button>
+          <p class="form-note">Ao confirmar, sua inscrição será registrada e você seguirá para o pagamento.</p>
+        </form>
+      </div>
+    </section>
+
+    <section id="success" class="success-section hidden-section">
+      <div class="container success-card">
+        <span class="check">✓</span>
+        <span class="eyebrow">INSCRIÇÃO REGISTRADA</span>
+        <h2>Agora finalize o pagamento</h2>
+        <p id="successText">Sua inscrição foi registrada.</p>
+        <div class="payment-summary"><span>Total da inscrição</span><strong id="successTotal">R$ 62,00</strong></div>
+        <div class="payment-alert" id="paymentAlert"></div>
+
+        <div class="payment-options">
+          <article class="payment-card pix-card">
+            <span class="payment-kicker">PIX</span>
+            <h3>R$ 62,00 por adulto</h3>
+            <img src="pix-qr.png" alt="QR Code Pix de R$ 62,00" class="pix-qr" />
+            <button id="copyPixButton" class="btn secondary full" type="button">Copiar código Pix</button>
+            <textarea id="pixCode" class="pix-code" readonly aria-label="Código Pix copia e cola"></textarea>
+          </article>
+
+          <article class="payment-card card-card">
+            <span class="payment-kicker">CARTÃO DE CRÉDITO</span>
+            <h3>R$ 62,00 por adulto</h3>
+            <p>Pagamento seguro pelo link da InfinitePay.</p>
+            <button id="cardPaymentButton" class="btn primary full" type="button">Pagar R$ 62,00 no cartão</button>
+            <small>Se houver mais de um adulto, faça um pagamento de R$ 62,00 para cada adulto inscrito.</small>
+          </article>
+        </div>
+
+        <p class="checkout-notice">Pagamento até <b>20/11/2026</b>. Após pagar, guarde o comprovante.</p>
+        <p class="pix-fallback">Para dúvidas, fale com Márcio — 3º ano.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner"><span>STNB Polo Campinas</span><span>Estudo • Caráter • Missão</span></div>
+  </footer>
+
+  <a href="#inscricao" class="mobile-cta">Fazer inscrição</a>
+  <script src="app.js"></script>
+</body>
+</html>
