@@ -11,3 +11,6 @@ Landing page de inscrição para o Churrasco de Confraternização de Final de A
 - Inscrições: Netlify Forms
 
 Branch isolada para deploy: `stnb-confraternizacao-2026`.
+
+
+Deploy de teste automático via GitHub Actions configurado.
