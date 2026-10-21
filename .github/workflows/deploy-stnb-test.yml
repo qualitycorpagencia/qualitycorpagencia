@@ -1,0 +1,46 @@
+name: Deploy STNB test to Netlify
+
+on:
+  push:
+    branches:
+      - stnb-confraternizacao-2026
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli@23.11.0
+
+      - name: Deploy anonymous test site
+        id: deploy
+        shell: bash
+        run: |
+          set -euo pipefail
+          netlify deploy --allow-anonymous --prod --dir . --json > deploy.json
+          cat deploy.json
+          node - <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('deploy.json','utf8'));
+          const url = data.url || data.deploy_url || data.deploy_ssl_url || data.ssl_url;
+          if (!url) {
+            console.error('No deploy URL found');
+            process.exit(1);
+          }
+          fs.writeFileSync('deploy-result.txt', url + '\n');
+          console.log('DEPLOY_URL=' + url);
+          NODE
+
+      - name: Upload deploy URL artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: netlify-deploy-result
+          path: deploy-result.txt
+          if-no-files-found: error
