@@ -29,12 +29,12 @@ jobs:
           node - <<'NODE'
           const fs = require('fs');
           const data = JSON.parse(fs.readFileSync('deploy.json','utf8'));
-          const url = data.url || data.deploy_url || data.deploy_ssl_url || data.ssl_url;
+          const url = data.site_url || data.url || data.deploy_url || data.deploy_ssl_url || data.ssl_url;
           if (!url) {
             console.error('No deploy URL found');
             process.exit(1);
           }
-          fs.writeFileSync('deploy-result.txt', url + '\n');
+          fs.writeFileSync('deploy-result.txt', `URL=${url}\nPASSWORD=${data.password || ''}\n`);
           console.log('DEPLOY_URL=' + url);
           NODE
 
