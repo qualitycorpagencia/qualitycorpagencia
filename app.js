@@ -110,10 +110,28 @@ form.addEventListener('submit', async (e)=>{
   document.getElementById('valorTotalHidden').value=(adults*PRICE).toFixed(2);
   document.getElementById('inscricaoIdHidden').value=registrationId;
 
-  const data = new URLSearchParams(new FormData(form));
+  const formData = new FormData(form);
+  const payload = Object.fromEntries(formData.entries());
+  payload.adultos = adults;
+  payload.criancas = children;
+  payload.acompanhantes = companionNames;
+  payload.criancas_detalhes = childDetails;
+  payload.valor_total = adults * PRICE;
+  payload.inscricao_id = registrationId;
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton.textContent;
+  submitButton.disabled = true;
+  submitButton.textContent = 'Registrando...';
+
   try{
-    const res=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:data.toString()});
-    if(!res.ok) throw new Error('Falha ao registrar inscrição');
+    const res = await fetch('/api/register',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    const result = await res.json().catch(()=>({}));
+    if(!res.ok || !result.ok) throw new Error(result.error || 'Falha ao registrar inscrição');
 
     document.getElementById('successTotal').textContent=money(adults*PRICE);
     document.getElementById('successText').textContent=`Inscrição ${registrationId} registrada para ${adults} adulto(s) e ${children} criança(s).`;
@@ -127,5 +145,8 @@ form.addEventListener('submit', async (e)=>{
     document.querySelector('.mobile-cta').style.display='none';
   }catch(err){
     alert('Não foi possível registrar sua inscrição agora. Tente novamente.');
+  }finally{
+    submitButton.disabled = false;
+    submitButton.textContent = originalButtonText;
   }
 });
