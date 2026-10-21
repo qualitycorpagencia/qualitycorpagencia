@@ -34,7 +34,7 @@ jobs:
             console.error('No deploy URL found');
             process.exit(1);
           }
-          fs.writeFileSync('deploy-result.txt', `URL=${url}\nPASSWORD=${data.password || ''}\n`);
+          fs.writeFileSync('deploy-result.txt', `URL=${url}\nPASSWORD=${data.password || ''}\nCLAIM_URL=${data.claim_url || ''}\n`);
           console.log('DEPLOY_URL=' + url);
           NODE
 
