@@ -17,14 +17,14 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
 
       - name: Install Netlify CLI
-        run: npm install -g netlify-cli@23.11.0
+        run: npm install -g netlify-cli@27.13.0
 
       - name: Deploy anonymous test site
         id: deploy
         shell: bash
         run: |
           set -euo pipefail
-          netlify deploy --allow-anonymous --prod --dir . --json > deploy.json
+          netlify deploy --dir . --no-build --allow-anonymous --json > deploy.json
           cat deploy.json
           node - <<'NODE'
           const fs = require('fs');
