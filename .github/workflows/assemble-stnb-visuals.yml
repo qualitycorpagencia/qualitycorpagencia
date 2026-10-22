@@ -20,7 +20,19 @@ jobs:
           ref: stnb-confraternizacao-2026
           fetch-depth: 0
 
-      - name: Assemble binary assets
+      - name: Wait until all chunks are ready
+        id: ready
+        shell: bash
+        run: |
+          if [ -f .asset-upload-v3/READY ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "Chunks still being uploaded; skipping assembly."
+          fi
+
+      - name: Assemble and validate binary assets
+        if: steps.ready.outputs.ready == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -30,8 +42,16 @@ jobs:
           file hero-final-user.webp
           test -s logo-final-user.webp
           test -s hero-final-user.webp
+          python3 - <<'PY'
+          from PIL import Image
+          for p in ["logo-final-user.webp","hero-final-user.webp"]:
+              im=Image.open(p)
+              im.verify()
+              print(p, "VALID")
+          PY
 
       - name: Commit assembled assets
+        if: steps.ready.outputs.ready == 'true'
         shell: bash
         run: |
           set -euo pipefail
