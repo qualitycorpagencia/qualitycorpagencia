@@ -1,0 +1,63 @@
+name: Finalize STNB logo and hero
+
+on:
+  push:
+    branches:
+      - stnb-confraternizacao-2026
+    paths:
+      - '.stnb-finalize'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: stnb-confraternizacao-2026
+          fetch-depth: 0
+
+      - name: Download exact STNB visual assets
+        shell: bash
+        env:
+          LOGO_URL: "https://media.canva.com/v2/image-resize/format:PNG/height:66/quality:100/uri:ifs%3A%2F%2FM%2F7a2d5e96-b1b1-4d74-be5c-6f97cd38ad2f/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAMErP5HA1eRLoQkKZz0oPF_bSfIcr9AK3u7tnOn7Y2w1&exp=1792713647&osig=AAAAAAAAAAAAAAAAAAAAAEmCyO83HrcZbc4pRKLDcOFrD6VW9CWgjHGVDNWtOJbT&signer=media-rpc&token=AAIAAU0AJDdhMmQ1ZTk2LWIxYjEtNGQ3NC1iZTVjLTZmOTdjZDM4YWQyZgAAAAABoWYPY5iDb7MYQqEhCcQuJc4cx7IIih_XTEJP2C1b7_nj52-SvQ&x-canva-quality=thumbnail"
+          HERO_URL: "https://media.canva.com/v2/image-resize/format:PNG/height:112/quality:100/uri:ifs%3A%2F%2FM%2Fde9ea7b0-7fd0-452e-9529-5241ec864782/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAD5DEhfEM-kbUCHxECi5mpwvRepBSpAHsoIZxzf49WAK&exp=1792714267&osig=AAAAAAAAAAAAAAAAAAAAAGWFcnIcl1bEfo4wuwN6zHq6C_iiz72rA5CFloRlKgRT&signer=media-rpc&token=AAIAAU0AJGRlOWVhN2IwLTdmZDAtNDUyZS05NTI5LTUyNDFlYzg2NDc4MgAAAAABoWYY2XhaJLJu9mi1kLKZ5ELOxBLNTPv-akwqqAqE5Zg8Ww0brQ&x-canva-quality=thumbnail"
+        run: |
+          set -euo pipefail
+          LOGO_HD="${LOGO_URL/height:66/height:400}"
+          LOGO_HD="${LOGO_HD/width:200/width:1200}"
+          HERO_HD="${HERO_URL/height:112/height:675}"
+          HERO_HD="${HERO_HD/width:200/width:1200}"
+          curl -fL --retry 3 "$LOGO_HD" -o logo-final-user.png
+          curl -fL --retry 3 "$HERO_HD" -o hero-final-user.png
+          file logo-final-user.png
+          file hero-final-user.png
+          test -s logo-final-user.png
+          test -s hero-final-user.png
+
+      - name: Point site to final assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text()
+          s=re.sub(r'logo-final-user\.webp(?:\?v=[^"\']+)?', 'logo-final-user.png?v=20261022-final', s)
+          s=re.sub(r'hero-final-user\.webp(?:\?v=[^"\']+)?', 'hero-final-user.png?v=20261022-final', s)
+          p.write_text(s)
+          PY
+
+      - name: Commit final assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .stnb-finalize
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html logo-final-user.png hero-final-user.png .stnb-finalize
+          git commit -m "Publish final STNB header logo and hero banner"
+          git push origin HEAD:stnb-confraternizacao-2026
