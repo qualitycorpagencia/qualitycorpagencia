@@ -1,6 +1,4 @@
 const PRICE = 62;
-const PIX_CODE = "00020101021126360014br.gov.bcb.pix0114+5519983673456520400005303986540562.005802BR5915MARCIO SANTA FE6009SAO PAULO622905251M5G4QPHFYJ9V3YN41R0V7526630429FB";
-const CARD_PAYMENT_URL = "https://link.infinitepay.io/qualitycorp/VC1D-F0yoFqtzHG-62,00";
 
 let adults = 1;
 let children = 0;
@@ -13,9 +11,6 @@ const summaryAdults = document.getElementById('summaryAdults');
 const summaryChildren = document.getElementById('summaryChildren');
 const summaryTotal = document.getElementById('summaryTotal');
 const form = document.getElementById('registrationForm');
-const copyPixButton = document.getElementById('copyPixButton');
-const cardPaymentButton = document.getElementById('cardPaymentButton');
-const pixCode = document.getElementById('pixCode');
 const paymentAlert = document.getElementById('paymentAlert');
 
 const money = (n) => n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
@@ -65,30 +60,12 @@ document.querySelectorAll('[data-step]').forEach(btn=>btn.addEventListener('clic
 }));
 
 renderDynamicFields();
-pixCode.value = PIX_CODE;
 
 function buildRegistrationId(){
   const now = new Date();
   const stamp = [now.getFullYear(), String(now.getMonth()+1).padStart(2,'0'), String(now.getDate()).padStart(2,'0')].join('');
   return `STNB-${stamp}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;
 }
-
-copyPixButton.addEventListener('click', async ()=>{
-  try{
-    await navigator.clipboard.writeText(PIX_CODE);
-    const original = copyPixButton.textContent;
-    copyPixButton.textContent = 'Código Pix copiado ✓';
-    setTimeout(()=> copyPixButton.textContent = original, 2200);
-  }catch{
-    pixCode.focus();
-    pixCode.select();
-    document.execCommand('copy');
-  }
-});
-
-cardPaymentButton.addEventListener('click', ()=>{
-  window.open(CARD_PAYMENT_URL,'_blank','noopener,noreferrer');
-});
 
 form.addEventListener('submit', async (e)=>{
   e.preventDefault();
@@ -131,18 +108,19 @@ form.addEventListener('submit', async (e)=>{
       body:JSON.stringify(payload)
     });
     const result = await res.json().catch(()=>({}));
-    if(!res.ok || !result.ok) throw new Error(result.error || 'Falha ao registrar inscrição');
+    if(!res.ok || !result.ok || !result.checkout_url) throw new Error(result.error || 'Falha ao gerar checkout');
 
     document.getElementById('successTotal').textContent=money(adults*PRICE);
     document.getElementById('successText').textContent=`Inscrição ${registrationId} registrada para ${adults} adulto(s) e ${children} criança(s).`;
 
-    paymentAlert.innerHTML = adults === 1
-      ? `<strong>1 adulto:</strong> faça 1 pagamento de ${money(PRICE)} por Pix ou cartão.`
-      : `<strong>${adults} adultos:</strong> o total é <strong>${money(adults*PRICE)}</strong>. Como os links de pagamento são de ${money(PRICE)} por pessoa, faça <strong>${adults} pagamentos de ${money(PRICE)}</strong> — um para cada adulto.`;
+    paymentAlert.innerHTML = `<strong>Pagamento único:</strong> o checkout foi gerado no valor total de <strong>${money(adults*PRICE)}</strong>. Na próxima tela você poderá escolher <strong>Pix ou cartão de crédito</strong>.`;
+
+    const checkoutButton = document.getElementById('dynamicCheckoutButton');
+    checkoutButton.href = result.checkout_url;
+    checkoutButton.dataset.checkoutUrl = result.checkout_url;
 
     document.getElementById('success').classList.remove('hidden-section');
     document.getElementById('success').scrollIntoView({behavior:'smooth'});
-    document.querySelector('.mobile-cta').style.display='none';
   }catch(err){
     alert('Não foi possível registrar sua inscrição agora. Tente novamente.');
   }finally{
