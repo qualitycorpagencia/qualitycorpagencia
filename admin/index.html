@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Inscrições — STNB 2026</title>
+<style>
+body{font-family:Arial,sans-serif;margin:0;background:#f7f2eb;color:#171412}
+main{max-width:1100px;margin:auto;padding:24px}
+h1{margin:0 0 18px}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+input,button{font:inherit;padding:10px 12px;border-radius:9px;border:1px solid #ccc}button{background:#b71918;color:#fff;border:0;font-weight:700}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}
+th,td{padding:10px;border-bottom:1px solid #eee;text-align:left;font-size:13px;vertical-align:top}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-weight:700}.pago{background:#dff5e5;color:#176b34}.pendente{background:#fff0cc;color:#7a5700}.cancelado,.estornado{background:#fde2e2;color:#8d1e1e}
+@media(max-width:760px){table{display:block;overflow:auto;white-space:nowrap}}
+</style>
+</head>
+<body>
+<main>
+<h1>Inscrições — Confraternização STNB 2026</h1>
+<div class="controls">
+<input id="key" type="password" placeholder="Chave administrativa">
+<button id="load">Carregar</button>
+<button id="csv">Exportar CSV</button>
+</div>
+<div id="summary"></div>
+<table>
+<thead><tr><th>ID</th><th>Nome</th><th>WhatsApp</th><th>Turma</th><th>Adultos</th><th>Crianças</th><th>Detalhes crianças</th><th>Total</th><th>Status</th><th>Pagamento</th></tr></thead>
+<tbody id="rows"></tbody>
+</table>
+</main>
+<script>
+let data=[];
+async function load(){
+ const key=document.getElementById('key').value.trim();
+ const r=await fetch('/api/admin-inscricoes?key='+encodeURIComponent(key));
+ const j=await r.json();
+ if(!j.ok){alert(j.error||'Erro');return;}
+ data=j.items||[];
+ document.getElementById('summary').textContent=data.length+' inscrição(ões) • '+data.filter(x=>x.status_pagamento==='pago').length+' paga(s)';
+ document.getElementById('rows').innerHTML=data.map(x=>`<tr>
+ <td>${x.inscricao_id||''}</td><td>${x.nome||''}</td><td>${x.whatsapp||''}</td><td>${x.turma||''}</td>
+ <td>${x.adultos||0}</td><td>${x.criancas||0}</td><td>${(x.criancas_detalhes||[]).join(' | ')}</td>
+ <td>R$ ${Number(x.valor_total||0).toFixed(2).replace('.',',')}</td>
+ <td><span class="badge ${x.status_pagamento||'pendente'}">${x.status_pagamento||'pendente'}</span></td>
+ <td>${x.pagamento?.capture_method||''} ${x.pagamento?.receipt_url?'<a target="_blank" href="'+x.pagamento.receipt_url+'">comprovante</a>':''}</td>
+ </tr>`).join('');
+}
+function csv(){
+ const rows=[['ID','Nome','WhatsApp','Turma','Adultos','Criancas','Detalhes criancas','Total','Status','Meio','Comprovante']];
+ for(const x of data) rows.push([x.inscricao_id,x.nome,x.whatsapp,x.turma,x.adultos,x.criancas,(x.criancas_detalhes||[]).join(' | '),x.valor_total,x.status_pagamento,x.pagamento?.capture_method||'',x.pagamento?.receipt_url||'']);
+ const q=v=>'"'+String(v??'').replaceAll('"','""')+'"';
+ const blob=new Blob([rows.map(r=>r.map(q).join(';')).join('\n')],{type:'text/csv;charset=utf-8'});
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='inscricoes-stnb-2026.csv';a.click();URL.revokeObjectURL(a.href);
+}
+document.getElementById('load').onclick=load;document.getElementById('csv').onclick=csv;
+</script>
+</body></html>
