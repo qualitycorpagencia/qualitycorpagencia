@@ -32,3 +32,39 @@ footer{background:#fff;border-top:1px solid var(--line)}.footer-inner{min-height
   .mobile-cta{display:none!important}
   footer .footer-inner{padding-bottom:16px}
 }
+
+/* Hero banner abaixo do logo — sem alterar a marca */
+.site-header{background:#fff}
+.header-inner{min-height:92px;padding:14px 0}
+.brand-logo{width:min(720px,92vw);height:auto;max-height:74px;object-fit:contain;object-position:center}
+.hero-banner{
+  background-image:url('hero-bbq.jpg');
+  background-size:cover;
+  background-position:center 52%;
+  min-height:300px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+.hero-banner:before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,0,0,.72) 0%,rgba(0,0,0,.48) 48%,rgba(0,0,0,.15) 100%);
+}
+.hero-banner-overlay{position:relative;z-index:1;width:100%}
+.hero-banner-content{color:#fff;text-align:left}
+.hero-banner-content span{display:block;font-size:13px;letter-spacing:.18em;font-weight:800;color:#ffb1ab;margin-bottom:8px}
+.hero-banner-content strong{display:block;font-size:clamp(48px,8vw,86px);line-height:.9;letter-spacing:-.035em}
+.hero-banner-content b{display:inline-block;margin-top:10px;background:#b71918;padding:8px 12px;border-radius:4px;font-size:16px;letter-spacing:.12em}
+@media(max-width:520px){
+  .header-inner{min-height:78px;padding:10px 0}
+  .brand-logo{width:min(94vw,540px);max-height:58px}
+  .hero-banner{min-height:210px;background-position:center 48%}
+  .hero-banner:before{background:linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.28))}
+  .hero-banner-content{padding:0 4px}
+  .hero-banner-content span{font-size:10px;letter-spacing:.14em;margin-bottom:6px}
+  .hero-banner-content strong{font-size:44px}
+  .hero-banner-content b{font-size:12px;letter-spacing:.10em}
+  .hero{padding-top:28px}
+}
