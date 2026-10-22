@@ -711,3 +711,123 @@ footer{background:#fff;border-top:1px solid #eee}
   .hero-action-row{padding-top:14px}
   .hero-main-cta{width:100%;min-width:0}
 }
+
+
+/* ===== CORREÇÃO DEFINITIVA: ASSETS VÁLIDOS ===== */
+.site-header{
+  background:#fff!important;
+  border-bottom:1px solid #ededed!important;
+}
+.header-inner{
+  min-height:118px!important;
+  padding:14px 0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+}
+.brand-logo{
+  display:block!important;
+  width:min(640px,72vw)!important;
+  height:auto!important;
+  max-height:88px!important;
+  object-fit:contain!important;
+  object-position:left center!important;
+}
+.hero-image-section{
+  background:#111!important;
+  padding:0 0 20px!important;
+}
+.hero-image-shell{
+  position:relative!important;
+  width:100%!important;
+  max-width:1440px!important;
+  height:clamp(360px,40vw,570px)!important;
+  margin:0 auto!important;
+  overflow:hidden!important;
+  background:#17110d!important;
+}
+.hero-image{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center 62%!important;
+  transform:scale(1.04)!important;
+}
+.hero-image-shell:after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  background:linear-gradient(90deg,rgba(10,6,4,.78) 0%,rgba(10,6,4,.55) 40%,rgba(10,6,4,.18) 72%,rgba(10,6,4,.05) 100%)!important;
+  z-index:1!important;
+}
+.hero-banner-copy{
+  position:absolute;
+  left:max(28px,calc((100% - 1160px)/2));
+  top:50%;
+  transform:translateY(-50%);
+  z-index:2;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-shadow:0 3px 18px rgba(0,0,0,.38);
+}
+.hero-banner-copy span{
+  color:#ffaaa6;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.22em;
+  margin-bottom:10px;
+}
+.hero-banner-copy strong{
+  font-size:clamp(62px,8vw,112px);
+  line-height:.82;
+  letter-spacing:-.035em;
+  font-family:Impact,Haettenschweiler,"Arial Narrow Bold",Arial,sans-serif;
+}
+.hero-banner-copy b{
+  margin-top:14px;
+  padding:9px 16px;
+  background:var(--red);
+  font-size:clamp(18px,2vw,28px);
+  letter-spacing:.06em;
+}
+.hero-banner-copy small{
+  margin-top:14px;
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.12em;
+}
+@media(max-width:900px){
+  .header-inner{min-height:96px!important;padding:11px 0!important}
+  .brand-logo{width:min(620px,82vw)!important;max-height:72px!important}
+  .brand-motto{display:none!important}
+  .hero-image-shell{height:430px!important}
+  .hero-banner-copy{left:30px}
+}
+@media(max-width:600px){
+  .header-inner{
+    min-height:82px!important;
+    padding:9px 0!important;
+    justify-content:center!important;
+  }
+  .brand-logo{
+    width:min(92vw,520px)!important;
+    max-height:64px!important;
+    object-position:center!important;
+  }
+  .hero-image-shell{height:330px!important}
+  .hero-image{object-position:center 60%!important;transform:scale(1.08)!important}
+  .hero-image-shell:after{
+    background:linear-gradient(90deg,rgba(10,6,4,.78),rgba(10,6,4,.34))!important;
+  }
+  .hero-banner-copy{left:20px;right:18px}
+  .hero-banner-copy span{font-size:10px;letter-spacing:.16em}
+  .hero-banner-copy strong{font-size:58px}
+  .hero-banner-copy b{font-size:17px;padding:8px 10px}
+  .hero-banner-copy small{font-size:11px;letter-spacing:.08em;line-height:1.45}
+  .hero-action-row{padding-top:14px!important}
+  .hero-main-cta{width:100%!important;min-width:0!important}
+}
