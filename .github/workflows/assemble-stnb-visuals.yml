@@ -5,14 +5,13 @@ on:
     branches:
       - stnb-confraternizacao-2026
     paths:
-      - '.asset-upload-v3/**'
+      - '.asset-upload-v4/**'
 
 permissions:
   contents: write
 
 jobs:
   assemble:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,28 +19,23 @@ jobs:
           ref: stnb-confraternizacao-2026
           fetch-depth: 0
 
-      - name: Wait until all chunks are ready
+      - name: Check readiness
         id: ready
         shell: bash
         run: |
-          if [ -f .asset-upload-v3/READY ]; then
+          if [ -f .asset-upload-v4/READY ]; then
             echo "ready=true" >> "$GITHUB_OUTPUT"
           else
             echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "Chunks still being uploaded; skipping assembly."
           fi
 
-      - name: Assemble and validate binary assets
+      - name: Assemble and validate
         if: steps.ready.outputs.ready == 'true'
         shell: bash
         run: |
           set -euo pipefail
-          cat .asset-upload-v3/logo/part-*.txt | tr -d '\n\r ' | base64 -d > logo-final-user.webp
-          cat .asset-upload-v3/hero/part-*.txt | tr -d '\n\r ' | base64 -d > hero-final-user.webp
-          file logo-final-user.webp
-          file hero-final-user.webp
-          test -s logo-final-user.webp
-          test -s hero-final-user.webp
+          cat .asset-upload-v4/logo/part-*.txt | tr -d '\n\r ' | base64 -d > logo-final-user.webp
+          cat .asset-upload-v4/hero/part-*.txt | tr -d '\n\r ' | base64 -d > hero-final-user.webp
           python3 - <<'PY'
           from PIL import Image
           for p in ["logo-final-user.webp","hero-final-user.webp"]:
@@ -55,9 +49,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          rm -rf .asset-upload-v3
+          rm -rf .asset-upload-v4
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A logo-final-user.webp hero-final-user.webp .asset-upload-v3
+          git add -A logo-final-user.webp hero-final-user.webp .asset-upload-v4
           git commit -m "Assemble final STNB logo and hero assets"
           git push origin HEAD:stnb-confraternizacao-2026
