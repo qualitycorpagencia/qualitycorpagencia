@@ -57,7 +57,11 @@ module.exports = async function handler(req, res) {
       handle: INFINITEPAY_HANDLE,
       order_nsu: safeId,
       redirect_url: REDIRECT_URL,
-      webhook_url: WEBHOOK_URL,
+      webhook: {
+        url: WEBHOOK_URL,
+        events: ['paid', 'settled', 'refunded', 'canceled', 'payment_failed']
+      },
+      single_payment: true,
       items: [
         {
           quantity: adultos,
