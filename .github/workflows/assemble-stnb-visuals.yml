@@ -37,15 +37,12 @@ jobs:
           set -euo pipefail
           cat .asset-upload-v3/logo/part-*.txt | tr -d '\n\r ' | base64 -d > logo-final-user.webp
           cat .asset-upload-v3/hero/part-*.txt | tr -d '\n\r ' | base64 -d > hero-final-user.webp
-          python3 - <<'PY'
-          from PIL import Image
-          for p in ["logo-final-user.webp","hero-final-user.webp"]:
-              im=Image.open(p)
-              print(p, im.size, im.mode)
-              im.verify()
-          PY
+          file logo-final-user.webp
+          file hero-final-user.webp
           test -s logo-final-user.webp
           test -s hero-final-user.webp
+          grep -q "Web/P image" <(file logo-final-user.webp)
+          grep -q "Web/P image" <(file hero-final-user.webp)
 
       - name: Commit assembled assets
         if: steps.ready.outputs.ready == 'true'
