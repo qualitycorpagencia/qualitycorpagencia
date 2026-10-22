@@ -831,3 +831,78 @@ footer{background:#fff;border-top:1px solid #eee}
   .hero-action-row{padding-top:14px!important}
   .hero-main-cta{width:100%!important;min-width:0!important}
 }
+
+
+/* ===== STNB FINAL VISUAL 20261022-1513 ===== */
+.site-header{
+  background:#fff!important;
+  border-bottom:1px solid #ececec!important;
+}
+.header-inner{
+  min-height:104px!important;
+  padding:12px 0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.brand-motto{display:none!important}
+.brand-logo{
+  display:block!important;
+  width:min(720px,92vw)!important;
+  max-width:100%!important;
+  height:auto!important;
+  max-height:88px!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  margin:0 auto!important;
+}
+.hero-image-section{
+  background:#0b0b0b!important;
+  padding:0 0 18px!important;
+}
+.hero-image-shell{
+  position:relative!important;
+  width:100%!important;
+  max-width:1672px!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0 auto!important;
+  overflow:hidden!important;
+  background:#0b0b0b!important;
+}
+.hero-image{
+  position:static!important;
+  inset:auto!important;
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  transform:none!important;
+}
+.hero-image-shell:before,.hero-image-shell:after{display:none!important}
+.hero-banner-copy{display:none!important}
+.hero-action-row{
+  display:flex!important;
+  justify-content:center!important;
+  padding-top:16px!important;
+}
+.hero-main-cta{min-width:280px!important;min-height:54px!important}
+@media(max-width:720px){
+  .header-inner{min-height:78px!important;padding:8px 0!important}
+  .brand-logo{width:min(94vw,600px)!important;max-height:62px!important}
+  .hero-image-section{padding-bottom:14px!important}
+  .hero-image-shell{width:100%!important;height:auto!important;min-height:0!important}
+  .hero-image{
+    position:static!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    transform:none!important;
+  }
+  .hero-action-row{padding-top:12px!important}
+  .hero-main-cta{width:100%!important;min-width:0!important}
+}
