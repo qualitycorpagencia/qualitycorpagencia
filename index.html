@@ -146,20 +146,13 @@
       <div class="payment-total"><span>Total da inscrição</span><strong id="successTotal">R$ 62,00</strong></div>
       <div class="payment-alert" id="paymentAlert"></div>
 
-      <div class="payment-grid">
-        <article class="payment-card">
-          <span class="payment-type">PIX</span>
-          <h3>R$ 62,00 por adulto</h3>
-          <img src="pix-qr.png" alt="QR Code Pix de R$ 62,00" class="pix-qr">
-          <button id="copyPixButton" class="btn btn-outline btn-full" type="button">Copiar código Pix</button>
-          <textarea id="pixCode" class="pix-code" readonly aria-label="Código Pix copia e cola"></textarea>
-        </article>
-        <article class="payment-card">
-          <span class="payment-type">CARTÃO DE CRÉDITO</span>
-          <h3>R$ 62,00 por adulto</h3>
-          <p>Pagamento seguro pelo link da InfinitePay.</p>
-          <button id="cardPaymentButton" class="btn btn-primary btn-full" type="button">Pagar no cartão</button>
-          <small>Para mais de um adulto, faça um pagamento de R$ 62,00 por adulto.</small>
+      <div class="payment-grid dynamic-payment-grid">
+        <article class="payment-card dynamic-payment-card">
+          <span class="payment-type">PAGAMENTO</span>
+          <h3>Pix ou cartão de crédito</h3>
+          <p>O valor do checkout é calculado automaticamente conforme a quantidade de adultos inscritos.</p>
+          <a id="dynamicCheckoutButton" class="btn btn-primary btn-full" href="#" rel="noopener">Pagar agora — Pix ou cartão</a>
+          <small>Você será direcionado ao Checkout InfinitePay com o valor total da sua inscrição.</small>
         </article>
       </div>
       <p class="payment-deadline">Pagamento até <b>20/11/2026</b>. Para dúvidas, fale com Márcio — 3º ano.</p>
