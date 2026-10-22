@@ -41,7 +41,7 @@ function renderDynamicFields(){
   if(children){
     const title = document.createElement('div');
     title.className='dynamic-title';
-    title.textContent='Crianças de até 8 anos';
+    title.textContent='Nome e idade das crianças de até 8 anos';
     childrenWrap.appendChild(title);
     for(let i=1;i<=children;i++){
       const row=document.createElement('div');
