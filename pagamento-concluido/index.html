@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Pagamento concluído — STNB Polo Campinas</title>
+  <title>Status do pagamento — STNB Polo Campinas</title>
   <meta name="description" content="Confirmação de pagamento da Confraternização STNB Polo Campinas 2026.">
   <style>
     :root{--red:#b71918;--ink:#171412;--cream:#f7f2eb;--muted:#6c625c}
@@ -20,14 +20,40 @@
 </head>
 <body>
   <main class="card">
-    <div class="check">✓</div>
-    <h1>Pagamento concluído</h1>
-    <p>Obrigado! Seu pagamento da Confraternização STNB Polo Campinas foi finalizado.</p>
-    <div class="note">
-      <strong>Importante:</strong> a confirmação definitiva será conciliada pelo sistema de pagamento. Guarde o comprovante até a confirmação.
-    </div>
+    <div class="check" id="mark">…</div>
+    <h1 id="title">Verificando pagamento</h1>
+    <p id="message">Estamos consultando a confirmação do Asaas.</p>
+    <div class="note" id="note">A confirmação só aparece aqui depois que o Asaas notificar o sistema.</div>
     <a href="/">Voltar para a página do evento</a>
     <small>STNB Polo Campinas • Estudo • Caráter • Missão</small>
   </main>
+  <script>
+    const id = new URLSearchParams(location.search).get('inscricao_id');
+    const title = document.getElementById('title');
+    const message = document.getElementById('message');
+    const mark = document.getElementById('mark');
+    const note = document.getElementById('note');
+    let attempts = 0;
+    async function checkStatus() {
+      if (!id) { title.textContent = 'Não encontramos a inscrição'; message.textContent = 'Fale com a organização para confirmar seus dados.'; mark.textContent = '!'; return; }
+      try {
+        const r = await fetch('/api/payment-status?inscricao_id=' + encodeURIComponent(id), { cache: 'no-store' });
+        const data = await r.json();
+        if (r.ok && data.status_pagamento === 'pago') {
+          title.textContent = 'Pagamento confirmado'; message.textContent = 'Seu pagamento da Confraternização STNB Polo Campinas foi confirmado.';
+          mark.textContent = '✓'; mark.style.background = '#e8f7ec'; mark.style.color = '#18823b';
+          note.textContent = 'Sua inscrição está confirmada. Guarde o comprovante até o dia do evento.'; return;
+        }
+        if (['cancelado','expirado','estornado'].includes(data.status_pagamento)) {
+          title.textContent = 'Pagamento não confirmado'; message.textContent = 'O checkout foi cancelado ou expirou. Volte à página do evento para gerar outro pagamento.';
+          mark.textContent = '!'; note.textContent = 'Se você já pagou, fale com a organização e envie o comprovante.'; return;
+        }
+      } catch {}
+      attempts += 1;
+      if (attempts < 20) setTimeout(checkStatus, 3000);
+      else { title.textContent = 'Confirmação em processamento'; message.textContent = 'Ainda não recebemos a confirmação. Não pague novamente agora.'; }
+    }
+    checkStatus();
+  </script>
 </body>
 </html>

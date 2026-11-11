@@ -43,7 +43,7 @@ async function load(){
  <td>${x.adultos||0}</td><td>${x.criancas||0}</td><td>${(x.criancas_detalhes||[]).join(' | ')}</td>
  <td>R$ ${Number(x.valor_total||0).toFixed(2).replace('.',',')}</td>
  <td><span class="badge ${x.status_pagamento||'pendente'}">${x.status_pagamento||'pendente'}</span></td>
- <td>${x.pagamento?.capture_method||''} ${x.pagamento?.receipt_url?'<a target="_blank" href="'+x.pagamento.receipt_url+'">comprovante</a>':''}</td>
+ <td>${x.pagamento?.provedor||x.provedor_pagamento||''} ${x.pagamento?.evento||''}</td>
  </tr>`).join('');
 }
 function csv(){

@@ -113,7 +113,7 @@ form.addEventListener('submit', async (e)=>{
     document.getElementById('successTotal').textContent=money(adults*PRICE);
     document.getElementById('successText').textContent=`Inscrição ${registrationId} registrada para ${adults} adulto(s) e ${children} criança(s).`;
 
-    paymentAlert.innerHTML = `<strong>Pagamento único:</strong> o checkout foi gerado no valor total de <strong>${money(adults*PRICE)}</strong>. Na próxima tela você poderá escolher <strong>Pix ou cartão de crédito</strong>.`;
+    paymentAlert.innerHTML = `<strong>Pagamento único:</strong> o checkout foi gerado no valor total de <strong>${money(adults*PRICE)}</strong>. Na próxima tela você poderá escolher <strong>Pix ou cartão de crédito</strong> no checkout seguro do Asaas.`;
 
     const checkoutButton = document.getElementById('dynamicCheckoutButton');
     checkoutButton.href = result.checkout_url;
